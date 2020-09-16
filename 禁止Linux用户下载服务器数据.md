@@ -1,6 +1,6 @@
 # 禁止Linux用户下载服务器数据
 
-该文用于向用户开放服务器的使用权限，如连接Hadoop平台的一台client节点，但是需要保证服务器上的数据安全，禁止用户下载，允许用户上传和部署作业。本文提供用户SSH秘钥登录，SFTP上传文件。
+本文用于向用户开放服务器的使用权限，如连接Hadoop集群的一台client节点，但是需要保证服务器上的数据安全，禁止用户下载，允许用户上传和部署作业。本文仅提供用户SSH秘钥登录，SFTP上传文件。
 
 ## 创建Linux用户
 
@@ -78,7 +78,7 @@ Subsystem sftp /usr/lib/sftp-server
 ```
 # 设置sftp服务器为只读模式，任何改变文件系统的操作都将被拒绝，比如修改文件等
 Subsystem sftp /usr/lib/sftp-server -R
-# 禁止sftp下载文件，即将read操作加入黑名单
+# 即将read操作加入黑名单，以实现禁止通过sftp下载文件的目的
 Subsystem sftp /usr/lib/sftp-server -P read
 ```
 ## FTP
