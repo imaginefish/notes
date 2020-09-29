@@ -36,7 +36,7 @@ visudo /etc/sudoers
 vim /etc/ssh/sshd_config
 ```
 
-提供SSH秘钥登录更加安全。首先切换至新建用户，并切换到home目录，方便操作。
+切换至新建用户，并转到home目录，方便操作。
 
 ```bash
 # 切换用户
