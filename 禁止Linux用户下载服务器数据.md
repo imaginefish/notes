@@ -101,7 +101,7 @@ mv /usr/bin/scp /usr/bin/scp_
 由于SSH远程登录和SFTP上传文件已经满足用户操作需求，为保障安全，公网IP防火墙仅开放22端口即可。
 
 ## Hadoop配置
-在hdfs上创建用户作业目录，并修改目录所属为用户
+在hdfs上创建用户作业目录，并修改目录所属为用户，以便用户向集群提交和运行作业。
 ```shell
 hdfs dfs -mkdir -p /user/user
 hdfs dfs -chown -R user:user /user/user
