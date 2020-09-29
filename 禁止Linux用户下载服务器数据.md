@@ -106,3 +106,12 @@ mv /usr/bin/scp /usr/bin/scp_
 hdfs dfs -mkdir -p /user/user
 hdfs dfs -chown -R user:user /user/user
 ```
+root用户初始化hive，创建用户数据库，并修改数据库目录所属为用户。
+```shell
+# 命令行进入并初始化hive
+hive
+# 创建用户数据库
+hive> create database user;
+# 修改数据库目录所属为用户
+hdfs dfs -chown -R user:user /user/hive/warehouse/user.db
+```
