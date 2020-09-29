@@ -29,6 +29,13 @@ visudo /etc/sudoers
 
 ## 创建SSH秘钥
 
+配置SSH支持密码登录，以确保ssh-copy-id命令可以执行，因为该命令基于SSH将本地公钥上传至服务器，在尚未能使用秘钥登录前，需通过用户密码登录。完成公钥上传后，再禁止密码登录。
+
+```shell
+# 编辑ssh配置文件，找到PasswordAuthentication no，将no修改为yes，公钥上传完后，再改回no
+vim /etc/ssh/sshd_config
+```
+
 提供SSH秘钥登录更加安全。首先切换至新建用户，并切换到home目录，方便操作。
 
 ```bash
@@ -36,13 +43,6 @@ visudo /etc/sudoers
 su user
 # 切换至home目录
 cd ~
-```
-
-配置SSH支持密码登录，以确保ssh-copy-id命令可以执行，因为该命令基于SSH将本地公钥上传至服务器，在尚未能使用秘钥登录前，需通过用户密码登录。完成公钥上传后，再禁止密码登录。
-
-```shell
-# 编辑ssh配置文件，找到PasswordAuthentication no，将no修改为yes，公钥上传完后，再改回no
-vim /etc/ssh/sshd_config
 ```
 
 创建SSH秘钥对，并把公钥加入授权文件。
