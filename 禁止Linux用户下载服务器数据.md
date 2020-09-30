@@ -115,3 +115,6 @@ hive> create database user;
 # 修改数据库目录所属为用户
 hdfs dfs -chown -R user:user /user/hive/warehouse/user.db
 ```
+若遇spark-sql运行报错。
+- 检查${SPARK_HOME}/jars目录下，是否缺失相关依赖包。若缺失，考虑重新编译，在编译时加入相关命令。
+- 检查${SPARK_HOME}/conf目录下，是否缺失hive-site.mxl配置文件。若缺失，将hive的该配置文件拷贝至该目录下。
