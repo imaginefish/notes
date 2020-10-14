@@ -15,7 +15,7 @@ Windows服务器一般通过远程桌面连接登录，所以需要禁止服务�
 进入`计算机管理`，找到本地用户和组，新建普通用户，配置其所属组为`Remote Desktop Users`和`Users`，赋予其远程登录和运行大部分软件的权限。
 ## 搭建配置sftp服务器
 检查服务器是否自带ssh服务，最新的Windows 10 系统自带，Windows Server 2016及以下需要用户自己配置。
-1. 下载安装Win32 OpenSSH，在Windows 10的早期版本和Windows Server 2016/2012 R2中，必须从GitHub（https://github.com/PowerShell/Win32-OpenSSH/releases）下载并安装OpenSSH 。
+1. 下载安装Win32 OpenSSH，在Windows 10的早期版本和Windows Server 2016/2012 R2中，必须从[GitHub](https://github.com/PowerShell/Win32-OpenSSH/releases)下载并安装OpenSSH 。
 2. 解压后将目标目录路径添加至Path环境变量中。
 3. 安装OpenSSH服务器，进入PowerShell，切换至解压路径，执行以下命令：
 ```PowerShell
@@ -29,11 +29,11 @@ Start-Service sshd
 5. 配置sftp禁止下载
 找到ssh配置文件sshd_config，定位到以下内容位置：
 ```
-Subsystem	sftp	sftp-server.exe
+Subsystem sftp sftp-server.exe
 ```
 修改为：
 ```
-Subsystem	sftp	sftp-server.exe -P read
+Subsystem sftp sftp-server.exe -P read
 ```
 `-P` 表示黑名单请求（blacklisted requests），`-P read`即表示禁止读操作。
 ## 配置防火墙
