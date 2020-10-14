@@ -29,7 +29,14 @@ visudo /etc/sudoers
 
 ## 创建SSH秘钥
 
-提供SSH秘钥登录更加安全。首先切换至新建用户，并切换到home目录，方便操作。
+配置SSH支持密码登录，以确保ssh-copy-id命令可以执行，因为该命令基于SSH将本地公钥上传至服务器，在尚未能使用秘钥登录前，需通过用户密码登录。完成公钥上传后，再禁止密码登录。
+
+```shell
+# 编辑ssh配置文件，找到PasswordAuthentication no，将no修改为yes，公钥上传完后，再改回no
+vim /etc/ssh/sshd_config
+```
+
+切换至新建用户，并转到home目录，方便操作。
 
 ```bash
 # 切换用户
@@ -38,14 +45,7 @@ su user
 cd ~
 ```
 
-配置SSH支持密码登录，以确保ssh-copy-id命令可以执行，因为该命令基于SSH将本地公钥上传至服务器，在尚未能使用秘钥登录前，需通过用户密码登录。完成公钥上传后，再禁止密码登录。
-
-```shell
-# 编辑ssh配置文件，找到PasswordAuthentication no，将no修改为yes，公钥上传完后，再改回no
-vim /etc/ssh/sshd_config
-```
-
-创建SSH秘钥对，并把公钥加入授权文件。
+创建SSH秘钥对，并把公钥加入授权文件，私钥交付用户登录。
 
 ```shell
 # -t 加密类型
@@ -98,4 +98,23 @@ mv /usr/bin/scp /usr/bin/scp_
 
 ## 防火墙
 
-由于SSH远程登录和SFTP上传文件已经满足用户操作需求，为保障安全，公网IP防火墙仅开放22端口即可。
+由于SSH远程登录和SFTP上传文件已经满足用户操作需求，为保障安全，防火墙下行规则仅开放22端口，上行规则的所有端口全部禁止。
+
+## Hadoop配置
+在hdfs上创建用户作业目录，并修改目录所属为用户，以便用户向集群提交和运行作业。
+```shell
+hdfs dfs -mkdir -p /user/user
+hdfs dfs -chown -R user:user /user/user
+```
+root用户初始化hive，创建用户数据库，并修改数据库目录所属为用户。
+```shell
+# 命令行进入并初始化hive
+hive
+# 创建用户数据库
+hive> create database user;
+# 修改数据库目录所属为用户
+hdfs dfs -chown -R user:user /user/hive/warehouse/user.db
+```
+若遇spark-sql运行报错。
+- 检查${SPARK_HOME}/jars目录下，是否缺失相关依赖包。若缺失，考虑重新编译，在编译时加入相关命令。
+- 检查${SPARK_HOME}/conf目录下，是否缺失hive-site.mxl配置文件。若缺失，将hive的该配置文件拷贝至该目录下。
