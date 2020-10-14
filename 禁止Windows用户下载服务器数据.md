@@ -27,7 +27,7 @@ Set-Service -Name sshd -StartupType ‘Automatic’
 Start-Service sshd
 ```
 5. 配置sftp禁止下载
-找到ssh配置文件sshd_config，定位到以下内容位置：
+找到ssh配置文件sshd_config（C:\ProgramData\SSH\sshd_config），定位到以下内容位置：
 ```
 Subsystem sftp sftp-server.exe
 ```
