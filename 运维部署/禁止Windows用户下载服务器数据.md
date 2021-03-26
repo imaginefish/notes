@@ -88,4 +88,3 @@ Subsystem sftp sftp-server.exe -P read
 ### 配置服务器本地防火墙
 1. 开启Windows防火墙，不勾选`阻止所有传入连接，包括位于允许应用列表中的应用`。
 2. 进入高级安全Windows防火墙，创建相应协议和端口的出站规则，启动规则。
->>>>>>> d84932f6f5f7a96519d7a277d4b7fda02ce296af
