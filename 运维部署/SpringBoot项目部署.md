@@ -17,8 +17,20 @@ ExecStart= /usr/bin/java -jar /root/web/test/test-0.0.1-SNAPSHOT.jar
 WantedBy=multi-user.target
 ```
 **注意：** 在实际使用中修改Description和ExecStart后面的内容。
-**启动服务**
 
+### 日志清除
+```shell
+# 冲洗日志数据至/var/log/journal
+journalctl --flush
+# 轮换日志文件
+journalctl --rotate
+# 清除日志至数据小于500m
+journalctl --vacuum-size=500m
+# 清除一小时之前的日志
+journalctl --vacuum-time=1h
+```
+
+**启动服务**
 ```shell
 systemctl start test
 ```
@@ -48,4 +60,10 @@ journalctl -u test
 
 使用[AlwaysUp](https://www.coretechnologies.com/products/AlwaysUp/)软件实现。
 
-参考引用：[https://blog.csdn.net/ly690226302/article/details/79260875](https://blog.csdn.net/ly690226302/article/details/79260875)
+参考来源：
+
+[https://blog.csdn.net/ly690226302/article/details/79260875](https://blog.csdn.net/ly690226302/article/details/79260875)
+
+[https://www.junmajinlong.com/linux/systemd/service_1](https://www.junmajinlong.com/linux/systemd/service_1)
+
+[https://www.cnblogs.com/sparkdev/p/8795141.html](https://www.cnblogs.com/sparkdev/p/8795141.html)
