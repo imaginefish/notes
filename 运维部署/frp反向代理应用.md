@@ -12,9 +12,9 @@
 - 服务端和客户端 UI 页面。
 
 
-项目 GitHub 地址 [https://github.com/fatedier/frp](https://github.com/fatedier/frp)
+项目 GitHub 地址：[https://github.com/fatedier/frp](https://github.com/fatedier/frp)
 
-项目中文文档地址 [https://gofrp.org/docs/](https://gofrp.org/docs/)
+项目中文文档地址：[https://gofrp.org/docs/](https://gofrp.org/docs/)
 ## frp 配置
 frp 提供了全平台的编译文件，你可以在 [https://github.com/fatedier/frp/releases](https://github.com/fatedier/frp/releases) 找到最新发行的版本。frp 分为服务端和客户端，下载解压后，文件中的 frps 即为服务端，frpc 则为客户端。服务端是指具有公网 IP 用于反向代理内网服务的服务器端，客户端是指被代理的内网主机端。
 ### 服务端配置
