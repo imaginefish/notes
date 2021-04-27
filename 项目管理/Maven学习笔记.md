@@ -20,4 +20,6 @@
 - 可以建立本地内部仓库；
 - 可以建立公共仓库
 
-这些优点使得 Nexu s日趋成为最流行的 Maven 仓库管理器。
+这些优点使得 Nexus 日趋成为最流行的 Maven 仓库管理器。
+
+参考来源：[https://www.cnblogs.com/wuzhenzhao/p/13307444.html](https://www.cnblogs.com/wuzhenzhao/p/13307444.html)

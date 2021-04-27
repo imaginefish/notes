@@ -57,8 +57,33 @@ systemctl status test
 journalctl -u test
 ```
 ## Windows 部署方案
-
+### AlwaysUp
 使用[AlwaysUp](https://www.coretechnologies.com/products/AlwaysUp/)软件实现。
+### 注册为 Windows 系统服务
+编写 bat 脚本，编写完成后双击运行进行测试
+```cmd
+java jar xxx.jar
+```
+sc 命令注册为系统服务，SC 是用来与服务控制管理器和服务进行通信的命令行程序，注意等号后面跟上一个空格。实测power shell无法执行 sc 命令，需以管理员身份运行 cmd 执行以下命令。
+```cmd
+sc create 服务名 binPath= "xxx.bat" start= "auto" displayname= "服务显示名称"
+```
+修改服务描述
+```cmd
+sc description "服务名" "服务描述"
+```
+启动服务，启动可能出现”服务没有响应控制功能“报错，但此时服务已经正常启动，可能是 bat 脚本代码不完整导致的（未验证）
+```cmd
+net start "服务名"
+```
+停止服务
+```cmd
+net stop "服务名"
+```
+删除服务
+```cmd
+sc delete "服务名"
+```
 
 参考来源：
 
